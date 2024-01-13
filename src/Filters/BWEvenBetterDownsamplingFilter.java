@@ -13,9 +13,9 @@ public class BWEvenBetterDownsamplingFilter implements PixelFilter {
         short[][] gray = img.getBWPixelGrid(); 
         short[][] returnArr = new short[(int) (gray.length*scale)][(int) (gray.length*scale)];
         
-        for (int i = 0; i < returnArr.length; i = i + 2) {
-            for (int j = 0; j < returnArr[i].length; j = j + 2) {
-                
+        for (int i = 0; i < returnArr.length; i++) {
+            for (int j = 0; j < returnArr[i].length; j++) {
+                returnArr[i][j] = sample(i, j, returnArr, scale);
             }
         }
 
@@ -34,8 +34,17 @@ public class BWEvenBetterDownsamplingFilter implements PixelFilter {
 
     private short sample (int r, int c, short[][] arr, double scale) {
         double scaleDiff = scale - (int) (scale);
+        int intScale = (int) scale;
+        double recipScale = 1/scale;
+        int avg = 0;
 
+        for (int i = r; i < r + intScale; i++) {
+            for (int j = c; j < c + intScale; j++) {
+                avg += arr[i][j];
+            }
+        }
 
+        return (short) avg;
     }
 
 }
