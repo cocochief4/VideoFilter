@@ -15,12 +15,15 @@ public class BWPolychromeFilter implements PixelFilter {
         for (int i = 0; i < returnArr.length; i++) {
             for (int j = 0; j < returnArr[i].length; j++) {
                 int val = returnArr[i][j];
-
-                for (int k = 0; k < intervals; k++) {
-                    if (val >= k * (255.0/intervals) && val <= (k + 1) * (255.0/intervals)) {
-                        val = 255/(2*intervals) * (2*k + 1);
-                    }
+                
+                val = val/(255/intervals);
+                val *= (255/intervals);
+                if (val == 255) {
+                    val = 255-(255/intervals);
                 }
+
+                val += (255/intervals/2);
+
                 returnArr[i][j] = (short) val;
             }
         }
