@@ -15,7 +15,7 @@ public class BWEvenBetterDownsamplingFilter implements PixelFilter {
         
         for (int i = 0; i < returnArr.length; i++) {
             for (int j = 0; j < returnArr[i].length; j++) {
-                returnArr[i][j] = sample(i, j, returnArr, scale);
+                returnArr[i][j] = sample((int) (i / scale), (int) (j / scale), gray, scale);
             }
         }
 
@@ -32,17 +32,36 @@ public class BWEvenBetterDownsamplingFilter implements PixelFilter {
         return avg;
     }
 
-    private short sample (int r, int c, short[][] arr, double scale) {
-        double scaleDiff = scale - (int) (scale);
-        int intScale = (int) scale;
-        double recipScale = 1/scale;
-        int avg = 0;
+    private short sample (double r, double c, short[][] arr, double scale) {
+        double avg = 0;
 
-        for (int i = r; i < r + intScale; i++) {
-            for (int j = c; j < c + intScale; j++) {
-                avg += arr[i][j];
+        double[][] weights = new double[(int) (1/scale + 1)][(int) (1/scale + 1)];
+
+        for (int i = 0; i < weights.length; i++) {
+            double xstartVal = r + i*scale/weights.length;
+            int xpInt = (int) xstartVal;
+            int xnInt = (int) (xstartVal + 1);
+            double xWeight = xnInt - xstartVal;
+
+            for (int j = 0; j < weights[i].length; j++) {
+                double ystartVal = c + j*scale/weights[i].length;
+                int ypInt = (int) ystartVal;
+                int ynInt = (int) (ystartVal + 1);
+                double yWeight = ynInt - ystartVal;
+
+                double trueWeight = arr[xpInt][ypInt] * xWeight * yWeight;
+                weights[i][j] = trueWeight;
+    
             }
         }
+
+        for (int i = 0; i < weights.length; i++) {
+            for (int j = 0; j < weights[i].length; j++) {
+                avg += weights[i][j];
+            }
+        }
+        
+        avg = avg / (weights.length * weights[0].length);
 
         return (short) avg;
     }
