@@ -2,9 +2,11 @@ package KMeansClustering;
 
 import java.util.ArrayList;
 
-public class Cluster extends Point {
+public class Cluster {
     
     private ArrayList<Point> points;
+    
+    private Point center;
     
     public Cluster() {
        
@@ -12,17 +14,8 @@ public class Cluster extends Point {
         int g = (int) (Math.random() * 256);
         int b = (int) (Math.random() * 256);
         
-        pos = new int[3];
-        pos[0] = r;
-        pos[1] = g;
-        pos[2] = b;
+        center = new Point(r, g, b);
         
-        points = new ArrayList<Point>();
-    }
-
-    public Cluster (int r, int g, int b) {
-        super(r, g, b);
-
         points = new ArrayList<Point>();
     }
     
@@ -35,6 +28,29 @@ public class Cluster extends Point {
     }
 
     public void calculateCenter() {
+        double r = 0;
+        double g = 0;
+        double b = 0;
+        
+        for (Point point : points) {
+            r += point.getPos()[0];
+            g += point.getPos()[1];
+            b += point.getPos()[2];
+        }
+        
+        r /= points.size();
+        g /= points.size();
+        b /= points.size();
+        
+        center.setPos((int) r, (int) g, (int) b);
+        
+    }
 
+    public Point getPos() {
+        return center;
+    }
+    
+    public ArrayList<Point> getPoints() {
+        return points;
     }
 }
