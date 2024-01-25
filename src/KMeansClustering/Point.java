@@ -5,6 +5,20 @@ import java.util.ArrayList;
 public class Point {
     /** r, g, b position of point */
     private int[] pos;
+
+    private int r, c;
+
+    public Point(int[] position, int r, int c) {
+        this(position);
+        this.r = r;
+        this.c = c;
+    }
+    
+    public Point(int r, int g, int b, int row, int col) {
+        this(r, g, b);
+        this.r = row;
+        this.c = col;
+    }
     
     public Point (int[] position) {
         pos = position;
@@ -57,6 +71,20 @@ public class Point {
         pos[0] = r;
         pos[1] = g;
         pos[2] = b;
+    }
+
+    public void setPos(Point pos2) {
+        
+        int r = pos2.pos[0];
+        int g = pos2.pos[1];
+        int b = pos2.pos[2];
+
+        setPos(r, g, b);
+    }
+    
+    public int[] get2dPos() {
+        int[] returnArr = {r, c};
+        return returnArr;
     }
 
 }
