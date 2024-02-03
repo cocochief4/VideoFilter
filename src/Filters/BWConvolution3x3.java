@@ -15,14 +15,23 @@ public class BWConvolution3x3 implements PixelFilter {
 
         // int k = Integer.parseInt(javax.swing.JOptionPane.showInputDialog("How many colors do you want?"));
          
-        int[][] kernel = 
+        int[][] boxBlurKernel = 
         {
-        {-2, -1, 0},
-        {-1, 0, 1},
-        {0, 1, 2},
+        {1, 0, -1},
+        {2, 0, -2},
+        {1, 0, -1},
+        };
+        
+        int[][] PrewittEdgeKernel = 
+        {
+        {-1, -1, -1},
+        {-1, 8, -1},
+        {-1, -1, -1},
         };
         
         int kernelWeight = 0;
+        
+        int[][] kernel = boxBlurKernel;
 
         for (int i = 0; i < kernel.length; i++) {
             for (int j = 0; j < kernel[i].length; j++) {
