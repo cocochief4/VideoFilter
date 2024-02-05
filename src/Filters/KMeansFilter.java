@@ -19,7 +19,7 @@ public class KMeansFilter implements PixelFilter{
         short[][] blue = img.getBlueChannel();
         
         // int k = Integer.parseInt(javax.swing.JOptionPane.showInputDialog("How many colors do you want?"));
-        int k = 60;
+        int k = 2;
 
         if (clusters == null) {
             clusters = initClusters(k);
@@ -32,7 +32,7 @@ public class KMeansFilter implements PixelFilter{
             }
         }
         
-        // while (!isStable(clusters)) {
+        while (!isStable(clusters)) {
             
             for (Cluster cluster : clusters) {
                 cluster.clearPoints();
@@ -45,7 +45,7 @@ public class KMeansFilter implements PixelFilter{
             for (Cluster cluster : clusters) {
                 cluster.calculateCenter();
             }
-        // }
+        }
 
         setNewColors(clusters, points);
 
