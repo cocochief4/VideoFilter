@@ -9,7 +9,8 @@ public class HSLColorMaskFilter implements PixelFilter{
     @Override
     public DImage processImage(DImage img) {
 
-        double tgtHue = Double.parseDouble(javax.swing.JOptionPane.showInputDialog("What is the target hue?"));
+        // double tgtHue = Double.parseDouble(javax.swing.JOptionPane.showInputDialog("What is the target hue?"));
+        double tgtHue = 20;
         
         short[][] gray = img.getBWPixelGrid();
         

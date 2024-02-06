@@ -21,9 +21,29 @@ public class CenterDrawer implements PixelFilter {
                 if (bw[i][j] == 255) {
                     r += i;
                     rCount ++;
+                    
+                    c += j;
+                    cCount ++;
+
                 }
             }
         }
+        
+        r /= rCount;
+        c /= cCount;
+
+        for (int i = 0; i < bw.length; i++) {
+            for (int j = 0; j < bw[i].length; j++) {
+                if (Math.abs(i-r) < 10 && Math.abs(j-c) < 10) {
+                    bw[i][j] = 255;
+                } else {
+                    bw[i][j] = 0;
+                }
+            }
+        }
+        
+        img.setPixels(bw);
+        return img;
     }
 }
  

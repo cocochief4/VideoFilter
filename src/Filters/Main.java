@@ -1,4 +1,4 @@
-package BallTracking;
+package Filters;
 
 import Interfaces.PixelFilter;
 import core.DImage;
@@ -18,15 +18,15 @@ public class Main implements PixelFilter {
         ArrayList<PixelFilter> pipeline = new ArrayList<PixelFilter>();
         pipeline.add(new Blur());
         pipeline.add(new Threshold());
-        pipeline.add (new CenterDrawer());
+        // pipeline.add (new CenterDrawer());
 
         for (int i = 0; i < pipeline.size(); i++) {
             pipeline.get(i).processImage(img);
         }
         
-        PixelFilter overlay = new Overlay();
+        /* PixelFilter overlay = new Overlay();
         
-        img = overlay.overlay(original, img);
+        img = overlay.overlay(original, img) */;
 
         return img;
     }
