@@ -23,6 +23,10 @@ public class Main implements PixelFilter {
         for (int i = 0; i < pipeline.size(); i++) {
             pipeline.get(i).processImage(img);
         }
+        
+        PixelFilter overlay = new Overlay();
+        
+        img = overlay.overlay(original, img);
 
         PixelFilter overlay = new Overlay(original);
 
