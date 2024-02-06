@@ -1,13 +1,15 @@
 package Filters;
 
+import Interfaces.Interactive;
 import Interfaces.PixelFilter;
 import core.DImage;
 
 import java.util.ArrayList;
 
 import BallTracking.*;
+import Filters.*;
 
-public class Main implements PixelFilter {
+public class Main implements PixelFilter, Interactive {
 
     @Override
     public DImage processImage(DImage img) {
@@ -17,7 +19,7 @@ public class Main implements PixelFilter {
 
         ArrayList<PixelFilter> pipeline = new ArrayList<PixelFilter>();
         pipeline.add(new Blur());
-        pipeline.add(new Thresh:waitold());
+        pipeline.add(new HSLColorMaskFilter());
         // pipeline.add (new CenterDrawer());
 
         for (int i = 0; i < pipeline.size(); i++) {
@@ -29,5 +31,18 @@ public class Main implements PixelFilter {
         img = overlay.overlay(original, img) */;
 
         return img;
+    }
+    
+    @Override
+    public void mouseClicked(int mouseX, int mouseY, DImage img) {
+        
+        tgtHue = RGBtoH(img.getRedChannel()[mouseY][mouseX], img.getGreenChannel()[mouseY][mouseX], img.getBlueChannel()[mouseY][mouseX]);
+
+    }
+
+    @Override
+    public void keyPressed(char key) {
+        // TODO Auto-generated method stub
+        // throw new UnsupportedOperationException("Unimplemented method 'keyPressed'");
     }
 }
