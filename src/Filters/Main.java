@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import BallTracking.*;
 
 public class Main implements PixelFilter {
-     
+
     @Override
     public DImage processImage(DImage img) {
 
@@ -17,7 +17,7 @@ public class Main implements PixelFilter {
 
         ArrayList<PixelFilter> pipeline = new ArrayList<PixelFilter>();
         pipeline.add(new Blur());
-        pipeline.add(new Threshold());
+        pipeline.add(new Thresh:waitold());
         // pipeline.add (new CenterDrawer());
 
         for (int i = 0; i < pipeline.size(); i++) {
@@ -31,4 +31,3 @@ public class Main implements PixelFilter {
         return img;
     }
 }
- 
