@@ -5,17 +5,15 @@ import core.DImage;
 
 import java.util.ArrayList;
 
-import BallTracking.Blur.*;
-import BallTracking.CenterDrawer.*;
-import BallTracking.Threshold.*;
+import BallTracking.*;
 
 public class Main implements PixelFilter {
-     
+
     @Override
     public DImage processImage(DImage img) {
 
         DImage original = new DImage(img);
-        original.setColorChannels(img.getRedChannel(), img.getGreenChannel(), img.getBlueChannel());
+        original.setColorChannels(img.getRedChannel().clone(), img.getGreenChannel().clone(), img.getBlueChannel().clone());
 
         ArrayList<PixelFilter> pipeline = new ArrayList<PixelFilter>();
         pipeline.add(new Blur());
@@ -26,7 +24,10 @@ public class Main implements PixelFilter {
             pipeline.get(i).processImage(img);
         }
 
+        PixelFilter overlay = new Overlay(original);
+
+        img = overlay.processImage(img);
+
         return img;
     }
 }
- 
