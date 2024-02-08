@@ -48,7 +48,10 @@ public class Main implements PixelFilter, Interactive {
 
     @Override
     public void keyPressed(char key) {
-        // TODO Auto-generated method stub
-        // throw new UnsupportedOperationException("Unimplemented method 'keyPressed'");
+        for (PixelFilter filter : pipeline) {
+            if (filter instanceof Interactive) {
+                ((Interactive)filter).keyPressed(key);
+            }
+        }
     }
 }
