@@ -8,7 +8,7 @@ import core.DImage;
 
 public class RGBDistMask implements PixelFilter, Interactive {
     
-    private int[] tgtrgb = {0, 0, 0};
+    private short[] tgtrgb = {0, 0, 0};
     private double threshold;
     
     public RGBDistMask() {
