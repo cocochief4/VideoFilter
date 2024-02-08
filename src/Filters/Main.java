@@ -16,7 +16,6 @@ public class Main implements PixelFilter, Interactive {
     public Main() {
         pipeline.add(new Blur());
         pipeline.add(new RGBDistMask());
-        pipeline.add(new CenterDrawer());
     }
 
     @Override
