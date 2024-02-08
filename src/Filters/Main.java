@@ -11,16 +11,18 @@ import Filters.*;
 
 public class Main implements PixelFilter, Interactive {
 
+    private static ArrayList<PixelFilter> pipeline = new ArrayList<PixelFilter>();
+
+    public Main() {
+        pipeline.add(new Blur());
+        pipeline.add(new HSLColorMaskFilter());
+    }
+
     @Override
     public DImage processImage(DImage img) {
 
         DImage original = new DImage(img);
         original.setColorChannels(img.getRedChannel().clone(), img.getGreenChannel().clone(), img.getBlueChannel().clone());
-
-        ArrayList<PixelFilter> pipeline = new ArrayList<PixelFilter>();
-        pipeline.add(new Blur());
-        pipeline.add(new HSLColorMaskFilter());
-        // pipeline.add (new CenterDrawer());
 
         for (int i = 0; i < pipeline.size(); i++) {
             pipeline.get(i).processImage(img);
@@ -36,7 +38,11 @@ public class Main implements PixelFilter, Interactive {
     @Override
     public void mouseClicked(int mouseX, int mouseY, DImage img) {
         
-        tgtHue = RGBtoH(img.getRedChannel()[mouseY][mouseX], img.getGreenChannel()[mouseY][mouseX], img.getBlueChannel()[mouseY][mouseX]);
+        for (PixelFilter filter : pipeline) {
+            if (filter instanceof Interactive) {
+                ((Interactive)filter).mouseClicked(mouseX, mouseY, img);
+            }
+        }
 
     }
 
