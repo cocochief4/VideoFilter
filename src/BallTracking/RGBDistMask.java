@@ -24,10 +24,10 @@ public class RGBDistMask implements PixelFilter, Interactive {
 
     @Override
     public void keyPressed(char key) {
-        if (key == '=') {
+        if (key == 'j') {
             threshold = threshold + 2;
         }
-        else if (key == '-') {
+        else if (key == 'k') {
             threshold = threshold - 2;
         }
     }
