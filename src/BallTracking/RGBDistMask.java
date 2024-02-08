@@ -26,7 +26,6 @@ public class RGBDistMask implements PixelFilter, Interactive {
     public void keyPressed(char key) {
         if (key == '=') {
             threshold = threshold + 2;
-            System.out.println("going up");
         }
         else if (key == '-') {
             threshold = threshold - 2;
