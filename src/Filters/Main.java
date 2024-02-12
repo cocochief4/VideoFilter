@@ -17,6 +17,10 @@ public class Main implements PixelFilter, Interactive {
         pipeline.add(new Blur());
         pipeline.add(new RGBRatioMask());
         pipeline.add(new CenterDrawer());
+        pipeline.add(new BWEvenBetterDownsamplingFilter());
+        pipeline.add(new CenterDrawerFloodFill());
+//        pipeline.add(new Blur());
+//        pipeline.add(new RGBDistMask());
     }
 
     @Override
@@ -24,6 +28,7 @@ public class Main implements PixelFilter, Interactive {
 
         DImage original = new DImage(img);
         original.setColorChannels(img.getRedChannel().clone(), img.getGreenChannel().clone(), img.getBlueChannel().clone());
+
 
         for (int i = 0; i < pipeline.size(); i++) {
             pipeline.get(i).processImage(img);

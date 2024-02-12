@@ -35,7 +35,7 @@ public class RGBDistMask implements PixelFilter, Interactive {
     @Override
     public DImage processImage(DImage img) {
         
-        int[][] rArr = new int[img.getHeight()][img.getWidth()];
+        short[][] rArr = img.getBWPixelGrid();
         
         for (int i = 0; i < img.getHeight(); i++) {
             for (int j = 0; j < img.getWidth(); j++) {
