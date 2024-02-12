@@ -31,7 +31,7 @@ public class BWConvolution3x3 implements PixelFilter {
         
         int kernelWeight = 0;
         
-        int[][] kernel = boxBlurKernel;
+        int[][] kernel = PrewittEdgeKernel;
 
         for (int i = 0; i < kernel.length; i++) {
             for (int j = 0; j < kernel[i].length; j++) {
