@@ -20,6 +20,11 @@ public class Main implements PixelFilter, Interactive {
         pipeline.add(new BWEvenBetterDownsamplingFilter(0.5));
         pipeline.add(new CenterDrawerFloodFill());
         pipeline.add(new BWEvenBetterDownsamplingFilter(2));
+        pipeline.add(new Blur());
+        pipeline.add(new RGBDistMask());
+        // pipeline.add(new CenterDrawer());
+        // pipeline.add(new BWEvenBetterDownsamplingFilter());
+        // pipeline.add(new CenterDrawerFloodFill());
 //        pipeline.add(new Blur());
 //        pipeline.add(new RGBDistMask());
     }

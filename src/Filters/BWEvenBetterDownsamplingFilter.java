@@ -13,6 +13,9 @@ public class BWEvenBetterDownsamplingFilter implements PixelFilter {
 
     @Override
     public DImage processImage(DImage img) {
+        
+        // double scale = Double.parseDouble(javax.swing.JOptionPane.showInputDialog("How much do you want to zoom?"));
+        double scale = Double.parseDouble(javax.swing.JOptionPane.showInputDialog("How much do you want to zoom?"));
 
         short[][] gray = img.getBWPixelGrid(); 
         short[][] returnArr = new short[(int) (gray.length*scale)][(int) (gray[0].length*scale)];

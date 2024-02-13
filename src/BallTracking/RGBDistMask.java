@@ -1,5 +1,6 @@
 package BallTracking;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import Interfaces.Interactive;
@@ -8,18 +9,21 @@ import core.DImage;
 
 public class RGBDistMask implements PixelFilter, Interactive {
     
-    private short[] tgtrgb = {0, 0, 0};
+    private ArrayList<short[]> tgtrgb = new ArrayList<short[]>();
     private double threshold;
     
     public RGBDistMask() {
         threshold = 5;
+        tgtrgb.add(new short[3]);
     }
 
     @Override
     public void mouseClicked(int mouseX, int mouseY, DImage img) {
-        tgtrgb[0] = img.getRedChannel()[mouseY][mouseX];
-        tgtrgb[1] = img.getGreenChannel()[mouseY][mouseX];
-        tgtrgb[2] = img.getBlueChannel()[mouseY][mouseX];
+        short[] newtgt = new short[3];
+        newtgt[0] = img.getRedChannel()[mouseY][mouseX];
+        newtgt[1] = img.getGreenChannel()[mouseY][mouseX];
+        newtgt[2] = img.getBlueChannel()[mouseY][mouseX];
+        tgtrgb.add(newtgt);
     }
 
     @Override
@@ -35,22 +39,24 @@ public class RGBDistMask implements PixelFilter, Interactive {
     @Override
     public DImage processImage(DImage img) {
         
-        short[][] rArr = img.getBWPixelGrid();
+        short[][] rArr = new short[img.getHeight()][img.getWidth()];
         
         for (int i = 0; i < img.getHeight(); i++) {
             for (int j = 0; j < img.getWidth(); j++) {
-                int dR = img.getRedChannel()[i][j]-tgtrgb[0];
-                int dG = img.getGreenChannel()[i][j]-tgtrgb[1];
-                int dB = img.getBlueChannel()[i][j]-tgtrgb[2];
+                for (short[] s : tgtrgb) {
+                    int dR = img.getRedChannel()[i][j]-s[0];
+                    int dG = img.getGreenChannel()[i][j]-s[1];
+                    int dB = img.getBlueChannel()[i][j]-s[2];
                 
-                double dist = Math.sqrt(dR*dR + dG*dG + dB*dB);
+                    double dist = Math.sqrt(dR*dR + dG*dG + dB*dB);
                 
-                if (dist < threshold) {
-                    rArr[i][j] = 255;
+                    if (dist < threshold) {
+                        rArr[i][j] = 255;
+                    }
+                    else {
+                    }
                 }
-                else {
-                    rArr[i][j] = 0;
-                }
+                
             }
         }
         
