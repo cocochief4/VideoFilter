@@ -4,6 +4,7 @@ import Interfaces.Interactive;
 import Interfaces.PixelFilter;
 import core.DImage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import BallTracking.*;
@@ -30,7 +31,7 @@ public class Main implements PixelFilter, Interactive {
     }
 
     @Override
-    public DImage processImage(DImage img) {
+    public DImage processImage(DImage img) throws IOException {
 
         DImage original = new DImage(img);
         original.setColorChannels(img.getRedChannel().clone(), img.getGreenChannel().clone(), img.getBlueChannel().clone());
