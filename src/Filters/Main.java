@@ -36,14 +36,13 @@ public class Main implements PixelFilter, Interactive {
         DImage original = new DImage(img);
         original.setColorChannels(img.getRedChannel().clone(), img.getGreenChannel().clone(), img.getBlueChannel().clone());
 
-
         for (int i = 0; i < pipeline.size(); i++) {
             img=pipeline.get(i).processImage(img);
         }
         
-        /* PixelFilter overlay = new Overlay();
+        Overlay overlay = new Overlay();
         
-        img = overlay.overlay(original, img) */;
+        img = overlay.overlay(original, img);
 
         return img;
     }

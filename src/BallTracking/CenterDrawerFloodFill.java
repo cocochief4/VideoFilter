@@ -81,7 +81,7 @@ public class CenterDrawerFloodFill implements PixelFilter {
 
                         for (int i = 0; i < grid.length; i++) {
                             for (int j = 0; j < grid[i].length; j++) {
-                                if (Math.abs(i-center.r) < 5 && Math.abs(j-center.c) < 5) {
+                                if (Math.abs(i-center.r) < 2 && Math.abs(j-center.c) < 2) {
                                     newGrid[i][j] = 0;
                                 } else if(newGrid[i][j]!=254){
                                     // newGrid[i][j] = 0;

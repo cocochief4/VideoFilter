@@ -3,17 +3,19 @@ package BallTracking;
 import Interfaces.PixelFilter;
 import core.DImage;
 
-public class Overlay implements PixelFilter {
+public class Overlay {
     DImage orig;
 
-    public Overlay(DImage orig){
-        this.orig=orig;
+    public Overlay(){
     }
-    @Override
-    public DImage processImage(DImage img) {
-        short[][] orig_red = img.getBWPixelGrid();
+    public void setOrig(DImage orig) {
+        this.orig = orig;
+    }
+    
+    public DImage overlay (DImage img, DImage processed) {
+        short[][] orig_red = img.getRedChannel();
 
-        short[][] img_red = img.getRedChannel();
+        short[][] img_red = processed.getBWPixelGrid();
 
         short[][] new_red = img.getRedChannel();
 
