@@ -11,9 +11,7 @@ public class Overlay implements PixelFilter {
     }
     @Override
     public DImage processImage(DImage img) {
-        short[][] orig_red = orig.getRedChannel();
-        short[][] orig_green = orig.getGreenChannel();
-        short[][] orig_blue = orig.getBlueChannel();
+        short[][] orig_red = img.getBWPixelGrid();
 
         short[][] img_red = img.getRedChannel();
 
@@ -28,7 +26,7 @@ public class Overlay implements PixelFilter {
                 }
             }
         }
-        img.setColorChannels(new_red,orig_green,orig_blue);
+        img.setColorChannels(new_red,img.getGreenChannel(),img.getBlueChannel());
         return img;
     }
 }

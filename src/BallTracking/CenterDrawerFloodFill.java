@@ -32,7 +32,7 @@ public class CenterDrawerFloodFill implements PixelFilter {
             floodFill(r,c+1,curVisited,grid);
         }
 
-        if((c-1)<grid.length && grid[r][c-1]>0 && !vis[r][c-1]){
+        if((c-1)>0 && grid[r][c-1]>0 && !vis[r][c-1]){
             vis[r][c-1]=true;
             floodFill(r,c-1,curVisited,grid);
         }
@@ -50,24 +50,24 @@ public class CenterDrawerFloodFill implements PixelFilter {
             }
         }
 
-        short[][] newGrid = new short[grid.length][grid[0].length];
+        short[][] newGrid = img.getBWPixelGrid();
 
         for(int r=0;r<grid.length;r++){
             for(int c=0;c<grid[0].length;c++){
                 if(grid[r][c]>0 && !vis[r][c]){
-                    System.out.println(r+" "+c);
+                    // System.out.println(r+" "+c);
                     ArrayList<Pixel> curVis = new ArrayList<>();
                     floodFill(r,c,curVis,grid);
                     if(curVis.size()>=50) {
                         Pixel center = Pixel.getCenter(curVis);
-                        System.out.println(center.r + " " + center.c + " " + curVis.size());
+                        // System.out.println(center.r + " " + center.c + " " + curVis.size());
 
                         for (int i = 0; i < grid.length; i++) {
                             for (int j = 0; j < grid[i].length; j++) {
                                 if (Math.abs(i-center.r) < 5 && Math.abs(j-center.c) < 5) {
-                                    newGrid[i][j] = 254;
-                                } else if(newGrid[i][j]!=254){
                                     newGrid[i][j] = 0;
+                                } else if(newGrid[i][j]!=254){
+                                    // newGrid[i][j] = 0;
                                 }
                             }
                         }

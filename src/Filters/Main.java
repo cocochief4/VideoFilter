@@ -14,14 +14,14 @@ public class Main implements PixelFilter, Interactive {
     private static ArrayList<PixelFilter> pipeline = new ArrayList<PixelFilter>();
 
     public Main() {
-//        pipeline.add(new Blur());
-//        pipeline.add(new RGBRatioMask());
+       pipeline.add(new Blur());
+       pipeline.add(new RGBDistMask());
 //        pipeline.add(new CenterDrawer());
-        pipeline.add(new BWEvenBetterDownsamplingFilter(0.5));
+        pipeline.add(new BWEvenBetterDownsamplingFilter(0.25));
         pipeline.add(new CenterDrawerFloodFill());
-        pipeline.add(new BWEvenBetterDownsamplingFilter(2));
-        pipeline.add(new Blur());
-        pipeline.add(new RGBDistMask());
+        pipeline.add(new BWEvenBetterDownsamplingFilter(4));
+        // pipeline.add(new Blur());
+        // pipeline.add(new RGBDistMask());
         // pipeline.add(new CenterDrawer());
         // pipeline.add(new BWEvenBetterDownsamplingFilter());
         // pipeline.add(new CenterDrawerFloodFill());
