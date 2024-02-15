@@ -45,10 +45,11 @@ public class CenterDrawerFloodFill implements PixelFilter {
     public static void logCenter(Pixel center){
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
 
-        String message=timeStamp+','+center.r+','+center.c+'\n';
+        String originalMessage = readFile("CenterLog.txt");
+        String message=originalMessage+'\n'+timeStamp+','+center.r+','+center.c+'\n';
 
         try {
-            writeDataToFile("CentersLog.txt",message);
+            writeDataToFile("CenterLog.txt",message);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -97,7 +98,6 @@ public class CenterDrawerFloodFill implements PixelFilter {
         return img;
     }
 
-
     public static String readFile(String filePath) {
         StringBuilder sb = new StringBuilder();
 
@@ -117,6 +117,7 @@ public class CenterDrawerFloodFill implements PixelFilter {
         return sb.toString();
     }
 
+
     public static void writeDataToFile(String filePath, String data) throws IOException {
         try (FileWriter f = new FileWriter(filePath);
              BufferedWriter b = new BufferedWriter(f);
@@ -128,11 +129,13 @@ public class CenterDrawerFloodFill implements PixelFilter {
             writer.close();
 
 
+
         } catch (IOException error) {
             System.err.println("There was a problem writing to the file: " + filePath);
             error.printStackTrace();
         }
     }
 
+            
 
 }
