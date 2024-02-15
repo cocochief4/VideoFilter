@@ -123,7 +123,7 @@ public class CenterDrawerFloodFill implements PixelFilter {
              BufferedWriter b = new BufferedWriter(f);
              PrintWriter writer = new PrintWriter(b);) {
 
-            System.out.println(data);
+            // System.out.println(data);
             writer.println(data);
             
             writer.close();
